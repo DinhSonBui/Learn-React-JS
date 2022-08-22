@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--SPREAD OPERATOR-->
+    <script>
+      //   var array1 = [1, 2];
+      //   var array2 = [3, 4];
+      //   var array3 = [...array1, ...array2];
+      //   console.log(array3); // -> {1,2,3,4}
+
+      //   var nameObject = {
+      //     name: "Son",
+      //   };
+      //   var ageObject = {
+      //     age: 21,
+      //   };
+      //   var info = {
+      //     ...nameObject,
+      //     ...ageObject,
+      //   };
+      //   console.log(info); //-> {name : "Son", age : 21}
+      // Nếu trong trường hợp object thứ 2 mà có cùng key với object thứ 1 thì sẽ lấy key object thứ 2
+
+      var array = ["Javascript", "PHP", "Ruby", "C++"];
+      function logger(...rest) {
+        // ... ở đây là rest
+        for (var i = 0; i < rest.length; i++) {
+          console.log(rest[i]);
+        }
+      }
+      logger(...array); // ... là toán tử spread
+    </script>
+  </body>
+</html>

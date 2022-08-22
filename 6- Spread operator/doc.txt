@@ -1,0 +1,3 @@
+- Spread operator có cú pháp giống với rest paraterter tuy nhiên cả hai có ý nghĩa khác nhau. Rest paramter được sử dụng khi khai báo hàm, ngược lại spread operator được sử dụng trong các câu lệnh, biểu thức hoặc khi gọi hàm.
+
+- Spread operator  trước tên array hoặc object sẽ lược bỏ đi dấu () và {}

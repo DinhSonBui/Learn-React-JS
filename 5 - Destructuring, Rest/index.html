@@ -30,6 +30,10 @@
       };
       //   var { name, price } = course;
       //   console.log(name, price); // -> Javascript 1000
+      //   var { name, ...rest } = course;
+      //   console.log(name, rest); // -> Javascript, {price: 1000,star: 4,}
+      //   var { name, price, star, ...rest } = course;
+      //   console.log(name, rest); // -> Javscript {}
       //   var { name, price1 } = course; // Khác với array thì object phải viết đúng name key của object , nếu ko sẽ bị undefined
       //   console.log(name, price1); // -> Javascript undefined
       //   var { price: newPrice, name } = course; // dung dau : newName để đăt tên cho biến mới ko phải là name key object nữa
