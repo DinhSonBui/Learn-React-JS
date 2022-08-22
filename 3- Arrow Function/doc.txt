@@ -1,0 +1,195 @@
+
+Arrow function là một trong những tính năng rất hay của ES6. Việc sử dụng đúng cách arrow function giúp code trở nên ngắn gọn và dễ hiểu hơn. Tuy nhiên, arrow function không thể thay thế hoàn toàn function thường được. Vì vậy, trong bài viết này, Hybrid Technologies sẽ giúp bạn phân biệt arrow function và function thường trong JavaScript. Qua đó, bạn sẽ biết cách sử dụng chúng sao cho phù hợp nhất với từng hoàn cảnh.
+
+Giống nhau
+Arrow function và function đều là function.
+
+Khác nhau cơ bản
+Cú pháp
+Arrow function sử dụng kí tự =>:
+
+let sayHi = () => {
+  console.log("Hi");
+}
+sayHi();
+// => Hi
+Function sử dụng từ khoá function:
+
+let sayHi = function() {
+  console.log("Hi");
+}
+sayHi();
+// => Hi
+Arrow function thường ngắn gọn hơn function
+Với hàm số có 1 tham số, arrow function có thể bỏ qua cặp dấu ngoặc đơn.
+
+// Sử dụng arrow function
+let greeting = name => {
+  console.log(`Hello, my name is ${name}`);
+}
+greeting("Lam");
+// => Hello, my name is Lam
+Tương đương với function:
+
+let greeting = function(name) {
+  console.log(`Hello, my name is ${name}`);
+}
+greeting("Lam");
+// => Hello, my name is Lam
+Ngoài ra, arrow function cũng có thể bỏ qua từ khoá return.
+
+// Sử dụng arrow function
+let double = x => x * 2;
+double(1); // 2
+Tương đương với function:
+
+// Sử dụng arrow function
+let double = x => x * 2;
+double(1); // 2
+Ví dụ sử dụng arrow function với các higher-order functions, như: forEach, map, filter,…
+
+Sử dụng map với function:
+
+let arr = [1, 2, 3, 4];
+let square1 = arr.map(function(e) {
+  return e * e;
+});
+console.log(square1); // => [1, 4, 9, 16]
+Sử dụng map với arrow function:
+
+let arr = [1, 2, 3, 4];
+let square2 = arr.map(e => e * e);
+console.log(square2); // => [1, 4, 9, 16]
+Arrow function không bind this
+Arrow function không định nghĩa giá trị this của riêng nó giống như function.
+
+Ví dụ sử dụng function:
+
+var x = 0;
+function DelayPrint(x, timeout) {
+  this.x = x;
+
+  setTimeout(function print() {
+    console.log(`The value is ${this.x}.`);
+  }, timeout);
+}
+let p = new DelayPrint(1, 1000);
+// => The value is 0.
+Trong chế độ none-strict, function print định nghĩa this chính là đối tượng global (đối với trình duyệt thì đó là window). Do đó, this.x tương đương với window.x và bằng 0.
+
+Để đoạn code trên hoạt động theo đúng mong muốn thì bạn phải sửa lại như sau:
+
+var x = 0;
+function DelayPrint(x, timeout) {
+  this.x = x;
+  let self = this;
+
+  setTimeout(function print() {
+    console.log(`The value is ${self.x}.`);
+  }, timeout);
+}
+let p = new DelayPrint(1, 1000);
+// => The value is 1.
+Ví dụ sử dụng arrow function:
+
+var x = 0;
+function DelayPrint(x, timeout) {
+  this.x = x;
+
+  setTimeout(() => {
+    console.log(`The value is ${this.x}.`);
+  }, timeout);
+}
+let p = new DelayPrint(1, 1000);
+// => The value is 1.
+Ngược lại với function, arrow function không định nghĩa lại this. Do đó, giá trị của this sẽ ứng với ngữ cảnh gần nhất của nó. Vì vậy, trong đoạn code trên this.x sẽ tương ứng với giá trị x được truyền vào và bằng 1.
+
+Arrow function không bind arguments
+Tương tự như đối với this, arrow function cũng không định nghĩa giá trị arguments của riêng nó.
+
+Đối tượng arguments đặc biệt hữu ích đối với những function không xác định trước số lượng tham số.
+
+function sum() {
+  return Array.from(arguments).reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+}
+
+console.log(sum(1, 2));         // => 3
+console.log(sum(1, 2, 3));      // => 6
+console.log(sum(1, 2, 3, 4));   // => 10
+Đối với arrow function, sử dụng arguments sẽ lỗi vì biến này không được định nghĩa ở arrow function.
+
+let sum = () => {
+  return Array.from(arguments).reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+}
+
+console.log(sum(1, 2));
+// Uncaught ReferenceError: arguments is not defined
+Tuy nhiên, bạn vẫn có thể sử dụng rest parameters để thay thế cho arguments.
+
+let sum = (...args) => {
+  return Array.from(args).reduce(
+    (accumulator, currentValue) => accumulator + currentValue
+  );
+}
+
+console.log(sum(1, 2));         // => 3
+console.log(sum(1, 2, 3));      // => 6
+console.log(sum(1, 2, 3, 4));   // => 10
+Arrow function không phù hợp làm method cho object
+Chính vì arrow function không định nghĩa giá trị this của riêng nó, nên cũng không phù hợp là method cho object.
+
+let obj = {
+  a: 1,
+  b: () => console.log(this.a, this),
+  c: function() {
+    console.log(this.a, this);
+  }
+}
+
+obj.b(); // prints undefined, Window {...} (or the global object)
+obj.c(); // prints 1, Object {...}
+Vì vậy, nếu muốn định nghĩa method cho object thì bạn nên sử dụng function.
+
+Arrow function không thể sử dụng làm hàm constructor
+Trước khi ES6 ra đời, người ta có thể sử dụng function làm hàm khởi tạo cho object.
+
+function Dog(name, color) {
+  this.name = name;
+  this.color = color;
+}
+let myDog = new Dog("Nick", "White");
+console.log(myDog.name, myDog.color);
+// => Nick White
+Nếu thay đoạn code trên bằng arrow function thì bạn sẽ bị lỗi: TypeError: Dog is not a constructor.
+
+let Dog = (name, color) => {
+  this.name = name;
+  this.color = color;
+}
+let myDog = new Dog("Nick", "White");
+console.log(myDog.name, myDog.color);
+// => TypeError: Dog is not a constructor
+Arrow function không có thuộc tính prototype
+Về cơ bản, mọi đối tượng trong JavaScript đều có thuộc tính prototype và kế thừa cũng theo prototype.
+
+Tuy nhiên, nếu arrow function không thể sử dụng làm constructor thì mình cho rằng điều này cũng hợp lý.
+
+let Foo = () => {};
+console.log(Foo.prototype); // undefined
+Arrow function không được hoisted
+Về cơ bản, hoisting được hiểu là biến và hàm số được đưa lên đầu của phạm vi biến, hàm số trước khi đoạn code đó được thực hiện.
+
+Arrow function không được hoisted: nghĩa là bạn phải định nghĩa arrow function trước khi sử dụng nó.
+
+let myFunc1 = () => {}
+myFunc1(); // OK
+myFunc2(); // => ReferenceError: myFunc2 is not defined
+let myFunc2 = () => {}
+Ngược lại, function declaration được hoisted nên bạn có thể gọi hàm trước khi định nghĩa nó.
+
+myFunc(); // OK
+function myFunc() {}
