@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--Destructuring,Rest-->
+    <script>
+      // * DESTRUCTURING ARRAY
+      // KHI CHUA SU DUNG Destructuring
+      // in ra cac phan tu trong mang
+      //   var array = [1, 2, 3];
+      //   var a = array[0];
+      //   var b = array[1];
+      //   var c = array[2];
+      //   console.log(a, b, c); // -> 1 2 3
+      // KHI SU DUNG Destructuring
+      //   var array = [1, 2, 3, 4, 5, 6, 7];
+      //   var [a, b, c, ...rest] = array;
+      //   console.log(a, b, c); // -> 1 2 3
+      //   console.log(rest); // -> [4,5,6,7]
+      // * DESTRUCTURING OBJECT
+      var course = {
+        name: "Javascript",
+        price: 1000,
+        star: 4,
+      };
+      //   var { name, price } = course;
+      //   console.log(name, price); // -> Javascript 1000
+      //   var { name, price1 } = course; // Khác với array thì object phải viết đúng name key của object , nếu ko sẽ bị undefined
+      //   console.log(name, price1); // -> Javascript undefined
+      //   var { price: newPrice, name } = course; // dung dau : newName để đăt tên cho biến mới ko phải là name key object nữa
+      //   console.log(name, newPrice); // -> Javascript 1000
+      var { name, price, star = 1 } = course; // Trong trương hop khai bao ra bien nhưng ko có trong object thì nó sẽ nhận value là undefied , nếu ko muốn nhận giá trị đó thì gán = value
+      console.log(name, price, star); // -> Javascript 1000 4
+
+      // ...rest nếu là trong trường hợp là tham số function hoặc khi sử dụng với destructuring
+    </script>
+  </body>
+</html>
