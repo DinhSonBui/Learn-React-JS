@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!--
+        Phương thức createElement() có chức năng tạo một node( hay một thẻ html) với tên node được xác định. Sau khi đã tạo node, ta có thể sử dụng phương thức createTextNode() để tạo nội dung văn bản và gán cho node đó. Cuối cùng sử dụng dụng phương thức element.appendChild() hoặc element.insertBefore() để gắn node vừa được tạo vào trang.
+        document.createElement()
+        document.body.appendChild()
+        console.dir()
+        innerText, id, className, style
+    -->
+    <div id="root"></div>
+    <script>
+      const root = document.querySelector("#root");
+      const h1 = document.createElement("h1");
+      h1.innerText = "Hi guys!";
+      h1.id = "heading";
+      h1.className = "heading1 heading2";
+      Object.assign(h1.style, {
+        color: "blue",
+        backgroundColor: "red",
+      });
+      root.appendChild(h1);
+      console.dir(h1);
+    </script>
+  </body>
+</html>
